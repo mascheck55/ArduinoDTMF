@@ -70,7 +70,9 @@ const unsigned char auc_SinParam [128] = {
 // might violate 1.5% frequency tolerance of DTMF
 //**************************************************************************
 
-#define SWC(x)  ((x)*128.0*8*510/Fck)
+#define SWC(x)  (int)((float)(x)*128.0*8.0*510.0/(float)Fck+0.5)
+const unsigned char auc_frequencyH [4] = {SWC(1209), SWC(1336), SWC(1477), SWC(1633)};
+const unsigned char auc_frequencyL [4] = {SWC(697), SWC(770), SWC(852), SWC(941)};
 //high frequency (column)
 //1209hz  ---> x_SW = 79
 //1336hz  ---> x_SW = 87
@@ -80,14 +82,14 @@ const unsigned char auc_SinParam [128] = {
 const char auc1KHz = SWC(1000);
 const char auc600Hz = SWC(600);
 
-#if Fck == 8000000 // 8 MHz
+/*#if Fck == 8000000 // 8 MHz
 const unsigned char auc_frequencyH [4] = {79,87,96,107}; //8MHz
 const unsigned char auc_frequencyL [4] = {46,50,56,62}; //8MHz
 #else
 const unsigned char auc_frequencyH [4] = {40, 44, 48,53}; //@16MHz
 const unsigned char auc_frequencyL [4] = {23, 25, 28, 31}; //@16MHz
 #endif
-//const unsigned char auc_frequencyH [4] = {SWC(1209), SWC(1336), SWC(1477), SWC(1633)};
+//const unsigned char auc_frequencyH [4] = {SWC(1209), SWC(1336), SWC(1477), SWC(1633)};*/
 //low frequency (row)
 //697hz  ---> x_SW = 46
 //770hz  ---> x_SW = 50
